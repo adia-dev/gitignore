@@ -1,5 +1,4 @@
-# #!/bin/bash
-#!/bin/zsh
+#!/bin/bash
 
 # TODO: maybe add a -u or --update option to update the local list of languages/frameworks/libraries
 # TODO: maybe use variables for the colors instead of hardcoding them eheheh...
