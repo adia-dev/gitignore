@@ -4,6 +4,8 @@
 
 Gitignore Script is a simple bash script to generate a .gitignore file for your project using the gitignore.io API. The script allows you to generate a gitignore file for specific languages, frameworks, or libraries, as well as use a custom template for the file.
 
+The project is still in its early stages, so there are still a lot of features to be added. If you have any suggestions, feel free to open an issue or submit a pull request.
+
 ## Installation
 
 To install the script, download it and move it to the installation directory:
@@ -93,3 +95,28 @@ This script is licensed under the MIT License. Please check the LICENSE file for
 ## Author
 
 This script was written by adia-dev. Please check my [GitHub profile](https://github.com/adia-dev) for more projects, you can also contact me on discord where I am quite active: adia#3344
+
+## Contributing
+
+Thank you for your interest in contributing to our project! We welcome all contributions, including bug fixes and new features.
+Please check the [CONTRIBUTING](https://github.com/adia-dev/gitignore/blob/main/CONTRIBUTING) file for more information.
+
+## Code of Conduct
+
+Please note that our project has a [Code of Conduct](https://github.com/adia-dev/gitignore/blob/main/CODE_OF_CONDUCT). We expect all contributors to adhere to its guidelines.
+
+## Acknowledgements
+
+- [gitingore.io](https://github.com/toptal/gitignore.io) - For the gitignore.io API
+
+## Disclaimer
+
+This script is not affiliated with gitingore.io in any way. All rights belong to the owner of the API.
+
+## Support
+
+If you like this project, please consider supporting it by giving it a star on GitHub. It really helps!
+
+## Contact
+
+As stated above, you can contact me on discord where I am quite active: adia#3344
