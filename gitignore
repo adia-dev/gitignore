@@ -13,6 +13,7 @@
 # TODO: I would love to ping an API everytime the script is used to count the number of times it is used and the number of languages/frameworks/libraries used but I don't know if it's legal or not eheheh...
 # TODO: Add a test suite to test the script, maybe make it available as a GitHub action, or even as a flag in the script itself eheheh...
 # FIXME: column: line too long, maybe use a variable for the column width
+# TODO: Add support to check if the script is up to date and if not, prompt the user to update it
 
 # Define the script values
 script_name="gitignore"
@@ -366,7 +367,6 @@ function gitignore() {
     # curl -sSL $gitignore_api_url/list >"$gitignore_path/available_gitignores"
     curl -sSL $gitignore_api_url/list >"$gitignore_path/available_gitignores"
 
-    echo "$list" >"$gitignore_path/available_gitignores"
     if [ $? -ne 0 ]; then
 
       echo "An error occurred while fetching the list of languages/frameworks/libraries."
@@ -376,16 +376,6 @@ function gitignore() {
     fi
   else
     echo "Using cached list of languages/frameworks/libraries..."
-    list=$(cat "$gitignore_path/available_gitignores")
-  fi
-
-  # Check if the provided languages are valid and print an error message if not
-  if [[ "$languages" != "" ]]; then
-    for language in $(echo "$languages" | sed "s/,/ /g"); do
-      if [[ "$list" != *"$language"* ]]; then
-        echo "$language is not a valid language/framework/library. Please check the list of available languages/frameworks/libraries using the -h or --help option."
-      fi
-    done
   fi
 
   list=$(cat "$gitignore_path/available_gitignores")
@@ -395,7 +385,20 @@ function gitignore() {
     echo "It might be a temporary issue, please try again later."
     echo "You can always create a github issue at $script_website/issues"
     echo ""
-    return 1
+  fi
+
+  # Check if the provided languages are valid and print an error message if not
+  if [[ "$languages" != "" ]]; then
+    # Check if the list is not empty before checking the languages
+    if [ "$list" = "" ]; then
+      echo "Could not fetch the list, thus we cannot affirm that the provided languages are valid." | sed -e 's/^/[90m/' -e 's/$/[0m/'
+    else
+      for language in $(echo "$languages" | sed "s/,/ /g"); do
+        if [[ "$list" != *"$language"* ]]; then
+          echo "$language is not a valid language/framework/library. Please check the list of available languages/frameworks/libraries using the -h or --help option."
+        fi
+      done
+    fi
   fi
 
   content=""
