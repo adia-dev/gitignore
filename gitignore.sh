@@ -97,6 +97,7 @@ function parse_arguments() {
       ;;
     -a | --append)
       append=true
+      generate
       ;;
     -h | --help)
       show_help
@@ -117,6 +118,7 @@ function parse_arguments() {
       if [ "$4" = "-o" ] || [ "$4" = "--overwrite-template" ]; then
         overrite_template=true
       fi
+      generate
       shift
       ;;
     -c | --clear-cache)
@@ -333,7 +335,12 @@ function generate() {
     # echo the excluded languages in red
     print_error "$to_exclude"
     # echo the included languages in green (remove the excluded languages from the list of languages)
-    print_success "$(echo "$languages" | sed "s/$to_exclude//g")"
+    if [[ "$to_exclude" != "" ]]; then
+      print_success "$(echo "$languages" | sed "s/$to_exclude//g")"
+    else
+      print_success "$(echo "$languages")"
+    fi
+    echo ""
   fi
 
   # Append to the existing file if requested
@@ -359,7 +366,6 @@ function gitignore() {
 
   parse_arguments "$@"
 
-  generate
 
   # Parse arguments
   # while [[ "$#" -gt 0 ]]; do
